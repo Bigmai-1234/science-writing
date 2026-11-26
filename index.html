@@ -241,6 +241,95 @@ figcaption{font-size:.8em;color:#4A483F;margin-top:.55em;text-align:center}
   .topbar{gap:8px;padding:8px 12px}
 }
 
+/* ---------- 笔记 ---------- */
+::highlight(note-0){background-color:#EC5615;color:#FFFFFF}
+::highlight(note-1){background-color:#C1D3DA;color:#1B1B1A}
+::highlight(note-2){background-color:#F9F5E6;color:#1B1B1A}
+::highlight(note-3){background-color:#F8E686;color:#1B1B1A}
+::highlight(note-4){background-color:#FF9D43;color:#1B1B1A}
+
+.npal{
+  position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:180;
+  display:none;align-items:center;gap:9px;padding:9px 13px;background:#fff;
+  border:1px solid #DAD5C8;border-radius:14px;
+  box-shadow:0 18px 38px -22px rgba(40,34,22,.5),0 2px 8px rgba(40,34,22,.06);
+  font-family:var(--sans);
+}
+body.note .npal{display:flex}
+.npal .np-hint{font-size:11.5px;color:#8A8880;letter-spacing:.02em;margin-right:2px}
+.npal .sw{width:24px;height:24px;border-radius:50%;border:2px solid #fff;
+  box-shadow:0 0 0 1px #D8D3C6;cursor:pointer;padding:0;transition:box-shadow .12s}
+.npal .sw.on{box-shadow:0 0 0 2px var(--accent)}
+.npundo{
+  position:fixed;left:50%;bottom:74px;transform:translateX(-50%);z-index:181;
+  display:none;align-items:center;gap:10px;padding:8px 12px;
+  background:#2C2A25;color:#F7F4EC;border-radius:10px;
+  font-family:var(--sans);font-size:12px;
+}
+.npundo.on{display:flex}
+.npundo button{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;
+  border-radius:6px;padding:3px 9px;font-size:11.5px;cursor:pointer}
+.npundo button:hover{background:rgba(255,255,255,.12)}
+#btnNote.on{background:#EFE9DC;border-color:#D7CDB8;color:var(--accent)}
+body.note .wrap{cursor:text}
+body.note .w{cursor:text}
+
+/* ---------- 有注释的标记：加虚线下划线 ---------- */
+::highlight(ann-0){background-color:#EC5615;color:#FFFFFF;text-decoration:underline dotted}
+::highlight(ann-1){background-color:#C1D3DA;color:#1B1B1A;text-decoration:underline dotted}
+::highlight(ann-2){background-color:#F9F5E6;color:#1B1B1A;text-decoration:underline dotted}
+::highlight(ann-3){background-color:#F8E686;color:#1B1B1A;text-decoration:underline dotted}
+::highlight(ann-4){background-color:#FF9D43;color:#1B1B1A;text-decoration:underline dotted}
+
+/* ---------- 注释输入框 ---------- */
+.annpop{
+  position:fixed;z-index:220;display:none;width:306px;max-width:calc(100vw - 20px);
+  background:#fff;border:1px solid #DAD5C8;border-radius:12px;
+  padding:11px 13px 10px;font-family:var(--sans);
+  box-shadow:0 20px 44px -20px rgba(40,34,22,.5),0 2px 8px rgba(40,34,22,.08);
+}
+.annpop.on{display:block}
+.annpop .ah{
+  display:flex;align-items:center;gap:7px;margin:0 0 6px;
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#A29C8E;
+}
+.annpop .adot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.14)}
+.annpop .aq{
+  font-family:var(--serif);font-size:12.5px;line-height:1.5;color:#7B776C;
+  border-left:2px solid #E3DCCB;padding-left:8px;margin-bottom:8px;
+}
+.annpop .at{
+  width:100%;min-height:72px;resize:vertical;display:block;
+  border:1px solid #DED8C9;border-radius:8px;background:#FBFAF6;
+  padding:8px 9px;font-family:var(--sans);font-size:13px;line-height:1.55;color:var(--ink);
+  outline:none;
+}
+.annpop .at:focus{border-color:#C9BFA6;background:#fff}
+.annpop .ab{display:flex;align-items:center;gap:8px;margin-top:8px}
+.annpop .ak{flex:1;font-size:10.5px;color:#B3AD9F;letter-spacing:.02em}
+.annpop .ab button{
+  font-family:var(--sans);font-size:11.5px;padding:4px 10px;border-radius:7px;
+  cursor:pointer;border:1px solid transparent;
+}
+.annpop .rm{background:none;color:#A8452F;border-color:#EFDCD5}
+.annpop .rm:hover{background:#FBF0EC}
+.annpop .ok{background:var(--accent);color:#fff}
+.annpop .ok:hover{background:#67302A}
+
+/* ---------- 悬停看注释 ---------- */
+.anntip{
+  position:fixed;z-index:215;display:none;max-width:320px;
+  background:#2C2A25;color:#F7F4EC;border-radius:9px;padding:8px 11px;
+  font-family:var(--sans);font-size:12.3px;line-height:1.6;
+  box-shadow:0 14px 30px -16px rgba(0,0,0,.55);pointer-events:none;
+}
+.anntip.on{display:block}
+.anntip .tq{
+  color:#B4AD9D;font-size:11px;line-height:1.45;margin-bottom:4px;
+  border-left:2px solid rgba(255,255,255,.24);padding-left:7px;
+}
+.anntip .tt{white-space:pre-wrap}
+
 
 /* ---------- 单文件：章节切换 ---------- */
 .part{display:none}
@@ -276,11 +365,12 @@ figcaption{font-size:.8em;color:#4A483F;margin-top:.55em;text-align:center}
     <button id="btnVoice" class="tb" title="切换美音/英音">美音</button>
     <button id="btnRate" class="tb" title="语速">1.0×</button>
     <button id="btnFont" class="tb" title="字号">A</button>
+    <button id="btnNote" class="tb" title="笔记：拖选文字标色">✎ 笔记</button>
     <button id="btnToc" class="tb" title="本章目录">☰</button>
   </div>
 </header>
 <main class="wrap">
-<div class="part on" id="p-cover"><div class="cover"><div class="hero"><div class="kk">Hilary Glasman-Deal · Imperial College Press</div><h1>Science Research Writing<br>for Non-Native Speakers of English</h1><p class="lede">原书讲的是“怎么写”，而不是“写什么”。这一版把 272 页正文重排为 8 个部分、74 个小节，<b>点正文任意单词</b>即可听发音、看音标与释义；也可用 <b>← / →</b> 键逐词左右跳过、连续听读。全部内容都在这一个文件里，拷到哪里都能直接打开。</p></div><div class="cgrid"><article class="ccard"><a class="cc-top" href="#p-intro" data-part="intro"><span class="cc-no">Introduction</span><h3>How to Use This Book</h3><p class="cc-note">为什么读这本书、怎么用这本书</p></a></article><article class="ccard"><a class="cc-top" href="#p-unit1" data-part="unit1"><span class="cc-no">Unit 1</span><h3>How to Write an Introduction</h3><p class="cc-note">引言的结构、时态、被动语态与写作任务</p></a><div class="cc-secs"><a href="#unit1-s1" data-part="unit1" data-sec="unit1-s1">1.1 Structure</a><a href="#unit1-s2" data-part="unit1" data-sec="unit1-s2">1.2 Grammar and Writing Skills</a><a href="#unit1-s6" data-part="unit1" data-sec="unit1-s6">1.3 Writing Task: Build a Model</a><a href="#unit1-s11" data-part="unit1" data-sec="unit1-s11">1.4 Vocabulary</a><a href="#unit1-s13" data-part="unit1" data-sec="unit1-s13">1.5 Writing an Introduction</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit2" data-part="unit2"><span class="cc-no">Unit 2</span><h3>Writing about Methodology</h3><p class="cc-note">方法部分：被动语态、冠词、副词位置</p></a><div class="cc-secs"><a href="#unit2-s1" data-part="unit2" data-sec="unit2-s1">2.1 Structure</a><a href="#unit2-s2" data-part="unit2" data-sec="unit2-s2">2.2 Grammar and Writing Skills</a><a href="#unit2-s6" data-part="unit2" data-sec="unit2-s6">2.3 Writing Task: Build a Model</a><a href="#unit2-s11" data-part="unit2" data-sec="unit2-s11">2.4 Vocabulary</a><a href="#unit2-s14" data-part="unit2" data-sec="unit2-s14">2.5 Writing a Methodology Section</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit3" data-part="unit3"><span class="cc-no">Unit 3</span><h3>Writing about Results</h3><p class="cc-note">结果部分：顺序、频度、数量与因果</p></a><div class="cc-secs"><a href="#unit3-s1" data-part="unit3" data-sec="unit3-s1">3.1 Structure</a><a href="#unit3-s2" data-part="unit3" data-sec="unit3-s2">3.2 Grammar and Writing Skills</a><a href="#unit3-s7" data-part="unit3" data-sec="unit3-s7">3.3 Writing Task: Build a Model</a><a href="#unit3-s12" data-part="unit3" data-sec="unit3-s12">3.4 Vocabulary</a><a href="#unit3-s14" data-part="unit3" data-sec="unit3-s14">3.5 Writing a Results Section</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit4" data-part="unit4"><span class="cc-no">Unit 4</span><h3>Writing the Discussion/Conclusion</h3><p class="cc-note">讨论与结论：如何收束全文</p></a><div class="cc-secs"><a href="#unit4-s1" data-part="unit4" data-sec="unit4-s1">4.1 Structure</a><a href="#unit4-s2" data-part="unit4" data-sec="unit4-s2">4.2 Grammar and Writing Skills</a><a href="#unit4-s3" data-part="unit4" data-sec="unit4-s3">4.3 Writing Task: Build a Model</a><a href="#unit4-s8" data-part="unit4" data-sec="unit4-s8">4.4 Vocabulary</a><a href="#unit4-s10" data-part="unit4" data-sec="unit4-s10">4.5 Writing a Discussion/Conclusion</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit5" data-part="unit5"><span class="cc-no">Unit 5</span><h3>Writing the Abstract</h3><p class="cc-note">摘要与标题：长度、时态与取题</p></a><div class="cc-secs"><a href="#unit5-s1" data-part="unit5" data-sec="unit5-s1">5.1 Structure</a><a href="#unit5-s2" data-part="unit5" data-sec="unit5-s2">5.2 Grammar and Writing Skills</a><a href="#unit5-s6" data-part="unit5" data-sec="unit5-s6">5.3 Writing Task: Build a Model</a><a href="#unit5-s11" data-part="unit5" data-sec="unit5-s11">5.4 Vocabulary</a><a href="#unit5-s14" data-part="unit5" data-sec="unit5-s14">5.5 Writing an Abstract</a><a href="#unit5-s17" data-part="unit5" data-sec="unit5-s17">5.6 Creating a Title</a></div></article><article class="ccard"><a class="cc-top" href="#p-back" data-part="back"><span class="cc-no">Appendices</span><h3>Sources, Resources, Appendices</h3><p class="cc-note">常用缩写、前缀、拉丁/希腊复数、常用动词</p></a></article><article class="ccard"><a class="cc-top" href="#p-indexes" data-part="indexes"><span class="cc-no">Indexes</span><h3>Index of Contents &amp; Vocabulary</h3><p class="cc-note">全书索引与词汇索引</p></a></article></div></div></div>
+<div class="part on" id="p-cover"><div class="cover"><div class="hero"><div class="kk">Hilary Glasman-Deal · Imperial College Press</div><h1>Science Research Writing<br>for Non-Native Speakers of English</h1><p class="lede">原书讲的是“怎么写”，而不是“写什么”。这一版把 272 页正文重排为 8 个部分、74 个小节，<b>点正文任意单词</b>即可听发音、看音标与释义；也可用 <b>← / →</b> 键逐词左右跳过、连续听读；点右上角「✎ 笔记」可拖选文字标色，标记存在本机；看到满意的标记可以<b>双击写注释</b>，正常浏览时把鼠标停上去就读到注释。全部内容都在这一个文件里，拷到哪里都能直接打开。</p></div><div class="cgrid"><article class="ccard"><a class="cc-top" href="#p-intro" data-part="intro"><span class="cc-no">Introduction</span><h3>How to Use This Book</h3><p class="cc-note">为什么读这本书、怎么用这本书</p></a></article><article class="ccard"><a class="cc-top" href="#p-unit1" data-part="unit1"><span class="cc-no">Unit 1</span><h3>How to Write an Introduction</h3><p class="cc-note">引言的结构、时态、被动语态与写作任务</p></a><div class="cc-secs"><a href="#unit1-s1" data-part="unit1" data-sec="unit1-s1">1.1 Structure</a><a href="#unit1-s2" data-part="unit1" data-sec="unit1-s2">1.2 Grammar and Writing Skills</a><a href="#unit1-s6" data-part="unit1" data-sec="unit1-s6">1.3 Writing Task: Build a Model</a><a href="#unit1-s11" data-part="unit1" data-sec="unit1-s11">1.4 Vocabulary</a><a href="#unit1-s13" data-part="unit1" data-sec="unit1-s13">1.5 Writing an Introduction</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit2" data-part="unit2"><span class="cc-no">Unit 2</span><h3>Writing about Methodology</h3><p class="cc-note">方法部分：被动语态、冠词、副词位置</p></a><div class="cc-secs"><a href="#unit2-s1" data-part="unit2" data-sec="unit2-s1">2.1 Structure</a><a href="#unit2-s2" data-part="unit2" data-sec="unit2-s2">2.2 Grammar and Writing Skills</a><a href="#unit2-s6" data-part="unit2" data-sec="unit2-s6">2.3 Writing Task: Build a Model</a><a href="#unit2-s11" data-part="unit2" data-sec="unit2-s11">2.4 Vocabulary</a><a href="#unit2-s14" data-part="unit2" data-sec="unit2-s14">2.5 Writing a Methodology Section</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit3" data-part="unit3"><span class="cc-no">Unit 3</span><h3>Writing about Results</h3><p class="cc-note">结果部分：顺序、频度、数量与因果</p></a><div class="cc-secs"><a href="#unit3-s1" data-part="unit3" data-sec="unit3-s1">3.1 Structure</a><a href="#unit3-s2" data-part="unit3" data-sec="unit3-s2">3.2 Grammar and Writing Skills</a><a href="#unit3-s7" data-part="unit3" data-sec="unit3-s7">3.3 Writing Task: Build a Model</a><a href="#unit3-s12" data-part="unit3" data-sec="unit3-s12">3.4 Vocabulary</a><a href="#unit3-s14" data-part="unit3" data-sec="unit3-s14">3.5 Writing a Results Section</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit4" data-part="unit4"><span class="cc-no">Unit 4</span><h3>Writing the Discussion/Conclusion</h3><p class="cc-note">讨论与结论：如何收束全文</p></a><div class="cc-secs"><a href="#unit4-s1" data-part="unit4" data-sec="unit4-s1">4.1 Structure</a><a href="#unit4-s2" data-part="unit4" data-sec="unit4-s2">4.2 Grammar and Writing Skills</a><a href="#unit4-s3" data-part="unit4" data-sec="unit4-s3">4.3 Writing Task: Build a Model</a><a href="#unit4-s8" data-part="unit4" data-sec="unit4-s8">4.4 Vocabulary</a><a href="#unit4-s10" data-part="unit4" data-sec="unit4-s10">4.5 Writing a Discussion/Conclusion</a></div></article><article class="ccard"><a class="cc-top" href="#p-unit5" data-part="unit5"><span class="cc-no">Unit 5</span><h3>Writing the Abstract</h3><p class="cc-note">摘要与标题：长度、时态与取题</p></a><div class="cc-secs"><a href="#unit5-s1" data-part="unit5" data-sec="unit5-s1">5.1 Structure</a><a href="#unit5-s2" data-part="unit5" data-sec="unit5-s2">5.2 Grammar and Writing Skills</a><a href="#unit5-s6" data-part="unit5" data-sec="unit5-s6">5.3 Writing Task: Build a Model</a><a href="#unit5-s11" data-part="unit5" data-sec="unit5-s11">5.4 Vocabulary</a><a href="#unit5-s14" data-part="unit5" data-sec="unit5-s14">5.5 Writing an Abstract</a><a href="#unit5-s17" data-part="unit5" data-sec="unit5-s17">5.6 Creating a Title</a></div></article><article class="ccard"><a class="cc-top" href="#p-back" data-part="back"><span class="cc-no">Appendices</span><h3>Sources, Resources, Appendices</h3><p class="cc-note">常用缩写、前缀、拉丁/希腊复数、常用动词</p></a></article><article class="ccard"><a class="cc-top" href="#p-indexes" data-part="indexes"><span class="cc-no">Indexes</span><h3>Index of Contents &amp; Vocabulary</h3><p class="cc-note">全书索引与词汇索引</p></a></article></div></div></div>
 <div class="part" id="p-intro"><section class="pg" data-p="v"><h1 class="unit">Introduction: How to Use This Book</h1>
 <p class="ind"><em>Things should be made as simple as possible, but not any simpler.</em></p>
 <p class="ind">— Albert Einstein</p>
@@ -2711,10 +2801,14 @@ window.ZH={"abbreviation":"n. 缩写；缩略","ability":"n. 能力；才能","a
       a.classList.toggle('on', a.getAttribute('data-part') === id);
     });
     wordsPart = null; wIdx = -1;
+    tiCache = null; tiPid = null;
+    closeAnn(); hideTip();
     buildToc();
+    renderNotes();
     if (!keepScroll) {
       window.scrollTo(0, 0);
-      setTimeout(function () { window.scrollTo(0, 0); }, 0);
+      requestAnimationFrame(function () { window.scrollTo(0, 0); });
+      setTimeout(function () { window.scrollTo(0, 0); }, 80);
     }
     if (sec) {
       var s = document.getElementById(sec);
@@ -3087,8 +3181,424 @@ window.ZH={"abbreviation":"n. 缩写；缩略","ability":"n. 能力；才能","a
       });
   }
 
+
+  /* ---------------------------------------------------------- 笔记：拖选标色 / 点击删除 */
+  var COLORS = ['#EC5615', '#C1D3DA', '#F9F5E6', '#F8E686', '#FF9D43'];
+  var NOTES_KEY = 'sw_notes_v1';
+  var notes = [], noteMode = false, curColor = 0;
+  var tiCache = null, tiPid = null;
+  var skipDeleteUntil = 0, undoItem = null, undoTimer = 0, undoEl = null;
+
+  function noteRoot() { return activePart() || document.querySelector('.wrap'); }
+  function notePid() {
+    var el = activePart() || PART_ELS[0];
+    return SINGLE && el ? el.id.replace(/^p-/, '') : 'doc';
+  }
+
+  function loadNotes() {
+    try { notes = JSON.parse(localStorage.getItem(NOTES_KEY) || '[]') || []; }
+    catch (e) { notes = []; }
+    if (!notes.length) notes = [];
+  }
+
+  function saveNotes() {
+    try { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); } catch (e) { }
+  }
+
+  /* 章内文本索引：节点 → 起始字符偏移（DOM 不变，缓存可复用） */
+  function textIndex(root) {
+    var pid = notePid();
+    if (tiCache && tiPid === pid) return tiCache;
+    var nodes = [], map = new Map(), total = 0, n, p;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    while ((n = w.nextNode())) {
+      p = n.parentNode;
+      if (!p || /^(SCRIPT|STYLE)$/.test(p.nodeName) || !n.nodeValue) continue;
+      nodes.push({ n: n, s: total });
+      map.set(n, total);
+      total += n.nodeValue.length;
+    }
+    tiCache = { nodes: nodes, map: map, len: total };
+    tiPid = pid;
+    return tiCache;
+  }
+
+  function offAt(root, node, off) {
+    var idx = textIndex(root);
+    return idx.map.has(node) ? idx.map.get(node) + off : -1;
+  }
+
+  function locate(idx, off) {
+    var lo = 0, hi = idx.nodes.length - 1, e = idx.nodes[0];
+    while (lo <= hi) {
+      var mid = (lo + hi) >> 1;
+      if (idx.nodes[mid].s <= off) { e = idx.nodes[mid]; lo = mid + 1; } else hi = mid - 1;
+    }
+    return { n: e.n, o: Math.max(0, Math.min(off - e.s, e.n.nodeValue.length)) };
+  }
+
+  function rangeOfOffsets(idx, a, b) {
+    var p1 = locate(idx, a), p2 = locate(idx, b);
+    var r = document.createRange();
+    try { r.setStart(p1.n, p1.o); r.setEnd(p2.n, p2.o); } catch (err) { return null; }
+    return r;
+  }
+
+  function sliceText(idx, a, b) {
+    var out = '';
+    for (var i = 0; i < idx.nodes.length; i++) {
+      var nd = idx.nodes[i], t = nd.n.nodeValue, st = nd.s, en = st + t.length;
+      if (en <= a) continue;
+      if (st >= b) break;
+      out += t.slice(Math.max(0, a - st), Math.min(t.length, b - st));
+      if (en >= b) break;
+    }
+    return out;
+  }
+
+  function setBucket(name, list) {
+    try {
+      if (!list.length) { CSS.highlights.delete(name); return; }
+      var h = new Highlight();
+      list.forEach(function (r) { h.add(r); });
+      CSS.highlights.set(name, h);
+    } catch (e) { }
+  }
+
+  function renderNotes() {
+    if (!hasHL) return;
+    var root = noteRoot();
+    if (!root) return;
+    var idx = textIndex(root), pid = notePid();
+    /* 有注释的标记单独一组，加下划线（悬停可见注释） */
+    var buckets = [[], [], [], [], []], annot = [[], [], [], [], []];
+    notes.forEach(function (nt) {
+      if (nt.p !== pid || !buckets[nt.c]) return;
+      if (nt.s < 0 || nt.e > idx.len || nt.e <= nt.s) return;
+      var now = sliceText(idx, nt.s, nt.e);
+      if (nt.t && now.slice(0, 12) !== nt.t.slice(0, 12)) {
+        /* 正文若变动过：在附近重新定位，找不到就跳过 */
+        var base = Math.max(0, nt.s - 600);
+        var at = sliceText(idx, base, Math.min(idx.len, nt.e + 600)).indexOf(nt.t);
+        if (at < 0) return;
+        nt.s = base + at;
+        nt.e = nt.s + nt.t.length;
+      }
+      var r = rangeOfOffsets(idx, nt.s, nt.e);
+      if (r) (nt.a ? annot : buckets)[nt.c].push(r);
+    });
+    for (var i = 0; i < 5; i++) {
+      setBucket('note-' + i, buckets[i]);
+      setBucket('ann-' + i, annot[i]);
+    }
+  }
+
+  function addNote(a, b) {
+    var idx = textIndex(noteRoot());
+    var txt = sliceText(idx, a, b);
+    if (!txt.replace(/\s+/g, '')) return;
+    notes.push({ p: notePid(), s: a, e: b, c: curColor, t: txt, id: 'n' + Date.now() });
+    saveNotes();
+    renderNotes();
+  }
+
+  function noteAt(off) {
+    var pid = notePid();
+    for (var i = notes.length - 1; i >= 0; i--) {
+      var n = notes[i];
+      if (n.p === pid && off >= n.s && off <= n.e) return i;
+    }
+    return -1;
+  }
+
+  function showUndo() {
+    if (!undoEl) return;
+    undoEl.classList.add('on');
+    clearTimeout(undoTimer);
+    undoTimer = setTimeout(function () { undoEl.classList.remove('on'); undoItem = null; }, 5000);
+  }
+
+  function removeNote(i) {
+    if (annIdx === i) closeAnn();
+    else if (annIdx > i) annIdx--;
+    undoItem = { n: notes[i], i: i };
+    notes.splice(i, 1);
+    saveNotes();
+    renderNotes();
+    showUndo();
+  }
+
+  function undoRemove() {
+    if (!undoItem) return;
+    notes.splice(undoItem.i, 0, undoItem.n);
+    undoItem = null;
+    if (undoEl) undoEl.classList.remove('on');
+    saveNotes();
+    renderNotes();
+  }
+
+  function setNoteMode(on) {
+    noteMode = on;
+    document.body.classList.toggle('note', on);
+    var b = $('#btnNote');
+    if (b) b.classList.toggle('on', on);
+    var hint = $('.hint');
+    if (hint) hint.textContent = on ? '拖选标色 / 双击注释' : '点词 / ←→ 发音';
+    if (on) hideCard();
+    renderNotes();
+  }
+
+  function buildNoteUI() {
+    if (!SINGLE || !hasHL) return;
+    var bar = document.createElement('div');
+    bar.className = 'npal';
+    var sw = '';
+    for (var i = 0; i < COLORS.length; i++) {
+      sw += '<button class="sw' + (i === curColor ? ' on' : '') + '" data-c="' + i
+        + '" style="background:' + COLORS[i] + '" title="' + COLORS[i] + '"></button>';
+    }
+    bar.innerHTML = '<span class="np-hint">拖选标色 · 单击删除 · 双击加注释</span>' + sw;
+    document.body.appendChild(bar);
+    bar.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('.sw') : null;
+      if (!t) return;
+      curColor = +t.getAttribute('data-c');
+      $$('.npal .sw').forEach(function (x) { x.classList.toggle('on', x === t); });
+    });
+
+    undoEl = document.createElement('div');
+    undoEl.className = 'npundo';
+    undoEl.innerHTML = '已删除一条标记<button>撤销</button>';
+    document.body.appendChild(undoEl);
+    undoEl.querySelector('button').addEventListener('click', undoRemove);
+  }
+
+  /* ---------------------------------------------------------- 标记注释：双击写 / 悬停读 */
+  var ann = null, annIdx = -1;
+  var tip = null, tipIdx = -1, tipTxt = '', tipW = 0, tipH = 0;
+  var delTimer = 0, delIdx = -1, dblArmed = 0, lastX = 0, lastY = 0, hovAt = 0;
+
+  function clip(s, n) {
+    s = String(s || '').replace(/\s+/g, ' ').trim();
+    return s.length > n ? s.slice(0, n) + '…' : s;
+  }
+
+  /* 坐标 → 命中的标记序号（无则 -1） */
+  function noteIndexAt(x, y) {
+    var root = noteRoot();
+    if (!root) return -1;
+    var cr = rangeAtPoint(x, y);
+    if (!cr || !cr.startContainer || cr.startContainer.nodeType !== 3) return -1;
+    if (!root.contains(cr.startContainer)) return -1;
+    var off = offAt(root, cr.startContainer, cr.startOffset);
+    return off < 0 ? -1 : noteAt(off);
+  }
+
+  function noteRect(i) {
+    var root = noteRoot();
+    if (!root || !notes[i]) return null;
+    var r = rangeOfOffsets(textIndex(root), notes[i].s, notes[i].e);
+    return r ? r.getBoundingClientRect() : null;
+  }
+
+  function cancelDelete() { clearTimeout(delTimer); delIdx = -1; }
+
+  function armDelete(i) {
+    cancelDelete();
+    delIdx = i;
+    delTimer = setTimeout(function () {
+      if (delIdx >= 0 && notes[delIdx]) removeNote(delIdx);
+      delIdx = -1;
+    }, 280);
+  }
+
+  /* ---------- 注释输入框 ---------- */
+  function buildAnnUI() {
+    ann = document.createElement('div');
+    ann.className = 'annpop';
+    ann.innerHTML = '<div class="ah"><span class="adot"></span>标记注释</div>'
+      + '<div class="aq"></div>'
+      + '<textarea class="at" rows="3" placeholder="写下理解、疑问或联想…"></textarea>'
+      + '<div class="ab"><span class="ak">Ctrl+Enter 保存</span>'
+      + '<button class="rm">移除标记</button><button class="ok">保存</button></div>';
+    document.body.appendChild(ann);
+    ann.addEventListener('click', function (e) {
+      var t = e.target;
+      if (t.classList.contains('ok')) saveAnn();
+      else if (t.classList.contains('rm')) {
+        var i = annIdx;
+        closeAnn();
+        if (i >= 0) removeNote(i);
+      }
+    });
+    ann.querySelector('.at').addEventListener('keydown', function (e) {
+      e.stopPropagation();
+      if (e.key === 'Escape') { e.preventDefault(); closeAnn(); return; }
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); saveAnn(); }
+    });
+  }
+
+  function openAnn(i) {
+    if (!notes[i]) return;
+    hideCard(); hideTip();
+    if (!ann) buildAnnUI();
+    annIdx = i;
+    ann.querySelector('.adot').style.background = COLORS[notes[i].c] || COLORS[0];
+    ann.querySelector('.aq').textContent = '“' + clip(notes[i].t, 46) + '”';
+    var ta = ann.querySelector('.at');
+    ta.value = notes[i].a || '';
+    ann.classList.add('on');
+    placeAnn(noteRect(i));
+    try {
+      ta.focus();
+      ta.setSelectionRange(ta.value.length, ta.value.length);
+    } catch (e) { }
+  }
+
+  function placeAnn(rect) {
+    if (!ann) return;
+    var w = ann.offsetWidth, h = ann.offsetHeight;
+    var left = rect ? rect.left : Math.max(20, lastX - w / 2);
+    var top = rect ? rect.bottom + 10 : lastY + 16;
+    if (top + h > window.innerHeight - 12) top = Math.max(10, (rect ? rect.top : lastY) - h - 10);
+    left = Math.max(10, Math.min(left, window.innerWidth - w - 10));
+    ann.style.left = left + 'px';
+    ann.style.top = top + 'px';
+  }
+
+  function closeAnn() {
+    if (ann) ann.classList.remove('on');
+    annIdx = -1;
+  }
+
+  function saveAnn() {
+    var i = annIdx;
+    if (i >= 0 && notes[i]) {
+      var v = ann.querySelector('.at').value.replace(/^\s+|\s+$/g, '');
+      if (v) notes[i].a = v; else delete notes[i].a;
+      saveNotes();
+      renderNotes();
+    }
+    closeAnn();
+  }
+
+  /* ---------- 悬停提示 ---------- */
+  function buildTip() {
+    tip = document.createElement('div');
+    tip.className = 'anntip';
+    tip.innerHTML = '<div class="tq"></div><div class="tt"></div>';
+    document.body.appendChild(tip);
+  }
+
+  function showTip(i, x, y) {
+    var n = notes[i];
+    if (!n || !n.a) return;
+    if (!tip) buildTip();
+    if (tipIdx !== i || tipTxt !== n.a) {
+      tip.querySelector('.tq').textContent = '“' + clip(n.t, 40) + '”';
+      tip.querySelector('.tt').textContent = n.a;
+      tipIdx = i;
+      tipTxt = n.a;
+      tip.classList.add('on');
+      tipW = tip.offsetWidth;
+      tipH = tip.offsetHeight;
+    }
+    tip.classList.add('on');
+    var left = x + 16, top = y + 18;
+    if (left + tipW > window.innerWidth - 10) left = Math.max(10, x - tipW - 14);
+    if (top + tipH > window.innerHeight - 10) top = Math.max(10, y - tipH - 14);
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+
+  function hideTip() {
+    if (tip) tip.classList.remove('on');
+    tipIdx = -1;
+    tipTxt = '';
+  }
+
+  function hoverCheck(x, y) {
+    if (noteMode || annIdx >= 0) { hideTip(); return; }
+    var i = noteIndexAt(x, y);
+    if (i < 0 || !notes[i].a) { hideTip(); return; }
+    showTip(i, x, y);
+  }
+
+  document.addEventListener('mousemove', function (e) {
+    lastX = e.clientX;
+    lastY = e.clientY;
+    if (e.buttons || noteMode || annIdx >= 0) { hideTip(); return; }
+    var now = Date.now();
+    if (now - hovAt < 40) return;
+    hovAt = now;
+    hoverCheck(e.clientX, e.clientY);
+  }, { passive: true });
+  document.addEventListener('mouseout', function (e) { if (!e.relatedTarget) hideTip(); });
+  window.addEventListener('scroll', hideTip, { passive: true });
+  window.addEventListener('resize', hideTip);
+
+  /* 双击标记 → 写/改注释 */
+  document.addEventListener('mousedown', function (e) {
+    if (e.detail >= 2) { dblArmed = Date.now(); cancelDelete(); }
+    if (annIdx >= 0 && ann && !ann.contains(e.target)) saveAnn();
+  });
+  document.addEventListener('dblclick', function (e) {
+    var host = e.target.closest && e.target.closest('.wrap');
+    if (!host) return;
+    if (e.target.closest('a, button, .toc, .topbar, .foot, #card, .annpop, .npal')) return;
+    var i = noteIndexAt(e.clientX, e.clientY);
+    if (i < 0) return;
+    e.preventDefault();
+    cancelDelete();
+    try { window.getSelection().removeAllRanges(); } catch (err) { }
+    openAnn(i);
+  });
+
+  /* 拖选 → 标色 */
+  document.addEventListener('mouseup', function () {
+    if (!noteMode) return;
+    setTimeout(function () {
+      if (Date.now() - dblArmed < 500) {     /* 双击：这次选区是浏览器选词，不建笔记 */
+        dblArmed = 0;
+        try { window.getSelection().removeAllRanges(); } catch (e) { }
+        return;
+      }
+      var sel = window.getSelection();
+      if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+      var root = noteRoot();
+      if (!root) return;
+      var r = sel.getRangeAt(0);
+      if (!root.contains(r.commonAncestorContainer)) return;
+      var idx = textIndex(root);
+      var a = offAt(root, r.startContainer, r.startOffset);
+      var b = offAt(root, r.endContainer, r.endOffset);
+      if (a < 0 || b < 0) return;
+      if (a > b) { var t = a; a = b; b = t; }
+      var txt = sliceText(idx, a, b);
+      var lead = txt.length - txt.replace(/^\s+/, '').length;
+      var tail = txt.length - txt.replace(/\s+$/, '').length;
+      a += lead; b -= tail;
+      if (b - a < 1) return;
+      addNote(a, b);
+      skipDeleteUntil = Date.now() + 300;
+      sel.removeAllRanges();
+    }, 0);
+  });
+
   /* ---------------------------------------------------------- 事件 */
   document.addEventListener('click', function (e) {
+    if (noteMode) {
+      if (e.target.closest && e.target.closest('.npal, .npundo, #btnNote, .annpop')) return;
+      if (Date.now() < skipDeleteUntil) return;
+      var r0 = noteRoot();
+      if (r0 && r0.contains(e.target)) {
+        var k = noteIndexAt(e.clientX, e.clientY);
+        /* 单击删除（延后 280ms，双击可写作注释） */
+        if (k >= 0) { e.preventDefault(); if (Date.now() - dblArmed > 400) armDelete(k); return; }
+        return;                   /* 正文区：笔记模式下不取词、不发音 */
+      }
+    }
+    hideTip();
     var go = e.target.closest ? e.target.closest('[data-part]') : null;
     if (go) {
       e.preventDefault();
@@ -3101,7 +3611,7 @@ window.ZH={"abbreviation":"n. 缩写；缩略","ability":"n. 能力；才能","a
         && !e.target.closest('#toc') && !e.target.closest('#btnToc')) {
       toc.classList.remove('on');
     }
-    if (e.target.closest && e.target.closest('#card')) return;
+    if (e.target.closest && e.target.closest('#card, .annpop')) return;
 
     var inText = e.target.closest && e.target.closest('.wrap')
       && !e.target.closest('a, button, .toc, .topbar, .foot');
@@ -3125,8 +3635,22 @@ window.ZH={"abbreviation":"n. 缩写；缩略","ability":"n. 能力；才能","a
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { hideCard(); var t = $('#toc'); if (t) t.classList.remove('on'); return; }
+    var tg = (e.target && e.target.tagName) || '';
+    if (tg === 'TEXTAREA' || tg === 'INPUT') return;      /* 注释输入框自己处理按键 */
+    if (e.key === 'Escape') {
+      if (annIdx >= 0) { closeAnn(); return; }
+      if (noteMode) { setNoteMode(false); return; }
+      hideCard(); var t = $('#toc'); if (t) t.classList.remove('on'); return;
+    }
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (noteMode) {
+      var n = parseInt(e.key, 10);
+      if (n >= 1 && n <= 5 && COLORS[n - 1]) {
+        curColor = n - 1;
+        $$('.npal .sw').forEach(function (x) { x.classList.toggle('on', +x.getAttribute('data-c') === curColor); });
+      }
+      return;
+    }
     var tag = (e.target && e.target.tagName) || '';
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag)) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); stepWord(1); }
@@ -3190,12 +3714,23 @@ window.ZH={"abbreviation":"n. 缩写；缩略","ability":"n. 能力；才能","a
       applyFs();
     };
     if (t) t.onclick = function () { $('#toc').classList.toggle('on'); };
+    var nb = $('#btnNote');
+    if (nb) {
+      if (!SINGLE || !hasHL) nb.style.display = 'none';
+      nb.onclick = function () { setNoteMode(!noteMode); };
+    }
   }
 
   /* ---------------------------------------------------------- 启动 */
   applyFs();
   bindTools();
+  loadNotes();
+  buildNoteUI();
   var hash = location.hash.replace('#', '');
+  if (SINGLE && /^p-/.test(hash)) {
+    /* 先摘掉 #p-xxx，免去浏览器把章节标题滚到吸顶栏下面 */
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { }
+  }
   if (SINGLE) {
     if (/^p-/.test(hash)) {
       showPart(hash.slice(2));
